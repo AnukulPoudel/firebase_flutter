@@ -10,19 +10,21 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<AuthController>();
-    print(user.toString());
-    return Scaffold(
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () async {
-              await controller.signOut();
-            },
-            child: Text("Sign Out"),
-          ),
-          SizedBox(height: 10),
-          Text("Welcome , ${user!.email}"),
-        ],
+    // print(user.toString());
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                await controller.signOut();
+              },
+              child: Text("Sign Out"),
+            ),
+            SizedBox(height: 10),
+            Text("Welcome , ${user!.email}"),
+          ],
+        ),
       ),
     );
   }
