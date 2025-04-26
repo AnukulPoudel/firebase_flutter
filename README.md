@@ -5,5 +5,5 @@ Completed:
 - email sign and sign up
 - signout
 
-Todo:
+Completed but not tested on android , on web says cant login from http use https 
 1. facebook sign in and sign up
