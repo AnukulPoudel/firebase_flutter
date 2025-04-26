@@ -1,6 +1,8 @@
 import 'package:firebase_learn/controllers/auth_controller.dart';
+import 'package:firebase_learn/controllers/notification_controller.dart';
 import 'package:firebase_learn/screens/sign_in_page.dart';
 import 'package:firebase_learn/screens/success_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,6 +33,17 @@ void main() async {
       version: "v15.0",
     );
   }
+
+  // for firebase notification
+  await FirebaseMessaging.instance.requestPermission(
+    provisional: true,
+    alert: true,
+    announcement: true,
+    badge: true,
+    carPlay: true,
+    criticalAlert: true,
+    sound: true,
+  );
 
   runApp(const MyApp());
 }
