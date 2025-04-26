@@ -14,8 +14,6 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final auth = FirebaseAuth.instanceFor(app: Firebase.app());
-  // To change it after initialization, use `setPersistence()`:
-  await auth.setPersistence(Persistence.SESSION);
 
   // GetxController
   Get.lazyPut(() => AuthController());
@@ -23,6 +21,8 @@ void main() async {
   // for fb web
   // check if is running on Web
   if (kIsWeb) {
+    // To change it after initialization, use `setPersistence()`:
+    await auth.setPersistence(Persistence.SESSION);
     // initialize the facebook javascript SDK
     await FacebookAuth.i.webAndDesktopInitialize(
       appId: "1413902346635433",
