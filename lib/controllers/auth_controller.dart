@@ -90,8 +90,22 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> signInWithFacebook() async {
+    try {
+      final credential = await _services.facebookSignInOption();
+      user = credential!.user;
+      if (user != null) {
+        Get.off(() => SuccessScreen(user: user!));
+      } else {
+        debugPrint("user is null in sign in with faceboo in controller");
+      }
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar("error", "something went wrong! $e");
+    }
+  }
+
   Future<void> signOut() async {
     await _services.signOut();
-    Get.to(() => SignInScreen());
+    Get.offAll(() => SignInScreen());
   }
 }

@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,18 @@ void main() async {
 
   // GetxController
   Get.lazyPut(() => AuthController());
+
+  // for fb web
+  // check if is running on Web
+  if (kIsWeb) {
+    // initialize the facebook javascript SDK
+    await FacebookAuth.i.webAndDesktopInitialize(
+      appId: "1413902346635433",
+      cookie: true,
+      xfbml: true,
+      version: "v15.0",
+    );
+  }
 
   runApp(const MyApp());
 }

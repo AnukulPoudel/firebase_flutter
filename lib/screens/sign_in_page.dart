@@ -34,15 +34,17 @@ class SignInScreen extends StatelessWidget {
                 children: [
                   // TODO:
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await controller.signInWithFacebook();
+                    },
                     icon: Icon(Icons.facebook),
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.grey),
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      controller.signInWithGoogle();
+                    onPressed: () async {
+                      await controller.signInWithGoogle();
                     },
                     icon: Icon(Icons.g_mobiledata_rounded),
                     style: ButtonStyle(
@@ -72,8 +74,8 @@ class SignInScreen extends StatelessWidget {
                 child: Text("Forgot your password?"),
               ),
               ElevatedButton(
-                onPressed: () {
-                  controller.signInEmailAndPassword(
+                onPressed: () async{
+                  await controller.signInEmailAndPassword(
                     email: emailController.text,
                     password: passwordController.text,
                   );

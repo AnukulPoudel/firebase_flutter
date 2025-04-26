@@ -30,15 +30,17 @@ class SignUpScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await controller.signInWithFacebook();
+                    },
                     icon: Icon(Icons.facebook),
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.grey),
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      controller.signInWithGoogle();
+                    onPressed: () async {
+                      await controller.signInWithGoogle();
                     },
                     icon: Icon(Icons.g_mobiledata_rounded),
                     style: ButtonStyle(
