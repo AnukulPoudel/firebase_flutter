@@ -8,12 +8,40 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+dependencies {
+
+  // Add core desugaring library
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+
+
+  // Import the Firebase BoM
+
+  implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+
+  // When using the BoM, don't specify versions in Firebase dependencies
+
+  implementation("com.google.firebase:firebase-analytics")
+
+
+  // Add the dependencies for any other desired Firebase products
+
+  // https://firebase.google.com/docs/android/setup#available-libraries
+
+}
+
+
 android {
     namespace = "com.example.firebase_learn"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = "27.0.12077973"
 
     compileOptions {
+        // Enable desugaring for new language APIs
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }

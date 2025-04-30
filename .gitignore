@@ -51,3 +51,6 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 /linux/
 /macos/
 # /ios/
+lib/utils/constants/notification_constants.dart
+lib/controllers/notification_controller.dart
+lib/services/notification_services.dart

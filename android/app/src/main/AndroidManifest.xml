@@ -1,6 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Permissions for scheduling notifications -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" /> <!-- For Android 14+ exact alarm scheduling -->
+    <!-- OR -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" /> <!-- For Android 13 (API 33) and above -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    
     <application
+
         android:label="firebase_learn"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -37,6 +47,30 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+
+        <!-- Receiver for handling boot events and rescheduling notifications -->
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Receiver for notification actions -->
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+
+        <!-- Foreground service for notifications -->
+        <service
+            android:name="com.dexterous.flutterlocalnotifications.ForegroundService"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:foregroundServiceType="location|dataSync"> <!-- Replace with needed service type(s) -->
+
+        </service>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
