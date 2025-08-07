@@ -5,6 +5,8 @@ Completed:
 - email sign and sign up
 - signout
 - facebook sign in and sign up
+- notification
 
 todo:
+
 - forgot password
